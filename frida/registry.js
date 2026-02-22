@@ -1,7 +1,10 @@
-var pNtQueryValueKey = Module.findExportByName('ntdll.dll', 'NtQueryValueKey');
-var pNtEnumerateValueKey = Module.findExportByName('ntdll.dll', 'NtEnumerateValueKey');
-var pNtQueryKey = Module.findExportByName('ntdll.dll', 'NtQueryKey');
-var pExpandEnvironmentStringsW = Module.findExportByName('kernelbase.dll', 'ExpandEnvironmentStringsW');
+var ntdll = Process.getModuleByName('ntdll.dll');
+var kernelbase = Process.getModuleByName('kernelbase.dll');
+
+var pNtQueryValueKey = ntdll.findExportByName('NtQueryValueKey');
+var pNtEnumerateValueKey = ntdll.findExportByName('NtEnumerateValueKey');
+var pNtQueryKey = ntdll.findExportByName('NtQueryKey');
+var pExpandEnvironmentStringsW = kernelbase.findExportByName('ExpandEnvironmentStringsW');
 
 // Native functions
 var fNtQueryKey = new NativeFunction(

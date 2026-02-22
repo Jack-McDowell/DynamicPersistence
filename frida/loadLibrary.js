@@ -1,7 +1,14 @@
 // TODO: use a more robust load library detection (NtCreateSection?)
-var pLoadLibraryExW = Module.findExportByName('Kernel32.dll', 'LoadLibraryExW');
-var pLoadLibraryW = Module.findExportByName('Kernel32.dll', 'LoadLibraryW');
-var pNtQueryAttributesFile = Module.findExportByName('ntdll.dll', 'NtQueryAttributesFile');
+var kernel32 = Process.getModuleByName('Kernel32.dll');
+var ntdll = Process.getModuleByName('ntdll.dll');
+
+var pLoadLibraryExW = kernel32.findExportByName('LoadLibraryExW');
+var pLoadLibraryW = kernel32.findExportByName('LoadLibraryW');
+var pNtQueryAttributesFile = ntdll.findExportByName('NtQueryAttributesFile');
+
+send("LoadLibraryExW at " + pLoadLibraryExW);
+send("LoadLibraryW at " + pLoadLibraryW);
+send("NtQueryAttributesFile at " + pNtQueryAttributesFile);
 
 var registryLoads = new Set();
 var hijacks = new Set();
